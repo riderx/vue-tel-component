@@ -1,0 +1,88 @@
+{
+  "name": "vue-ts-lib",
+  "version": "0.0.0",
+  "description": "Some awesome description",
+  "main": "dist/vue-ts-lib.cjs.js",
+  "unpkg": "dist/vue-ts-lib.global.js",
+  "jsdelivr": "dist/vue-ts-lib.global.js",
+  "module": "dist/vue-ts-lib.esm-bundler.js",
+  "types": "dist/vue-ts-lib.d.ts",
+  "sideEffects": false,
+  "author": {
+    "name": "Eduardo San Martin Morote",
+    "email": "posva13@gmail.com"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "build:dts": "api-extractor run --local --verbose",
+    "release": "bash scripts/release.sh",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
+    "size": "size-limit",
+    "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
+    "lint:fix": "yarn run lint --write",
+    "test:types": "tsc --build tsconfig.json",
+    "test:unit": "jest",
+    "test": "yarn run test:types && yarn run test:unit --coverage && yarn run build && yarn run build:dts"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/vue-ts-lib.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [],
+  "license": "MIT",
+  "devDependencies": {
+    "@microsoft/api-extractor": "7.19.4",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-replace": "^3.1.0",
+    "@size-limit/preset-small-lib": "^6.0.4",
+    "@sucrase/jest-plugin": "^2.2.0",
+    "@types/jest": "^26.0.24",
+    "@types/jsdom": "^16.2.14",
+    "@vue/test-utils": "^2.0.0-rc.17",
+    "codecov": "^3.8.3",
+    "conventional-changelog-cli": "^2.2.2",
+    "jest": "^26.6.3",
+    "lint-staged": "^12.3.4",
+    "pascalcase": "^1.0.0",
+    "prettier": "^2.5.1",
+    "rollup": "^2.67.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "size-limit": "^6.0.4",
+    "typescript": "^4.5.5",
+    "vue": "^3.2.31",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "node scripts/verifyCommit.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "size-limit": [
+    {
+      "path": "size-checks/basic.js"
+    }
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.23"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/posva/vue-ts-lib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/posva/vue-ts-lib/issues"
+  },
+  "homepage": "https://github.com/posva/vue-ts-lib#readme"
+}
